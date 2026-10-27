@@ -9,13 +9,13 @@ import classes from './Subpage.module.css';
 
 const repo = 'https://github.com/urmamge/drag-trainer';
 /** Each version's Drag-Trainer.exe, straight from its GitHub release. */
-const downloadV1 = `${repo}/releases/download/v1.0.1/Drag-Trainer.exe`;
-const downloadV11 = `${repo}/releases/download/v1.1.1/Drag-Trainer.exe`;
+const downloadV1 = `${repo}/releases/download/v1.0.2/Drag-Trainer.exe`;
+const downloadV11 = `${repo}/releases/download/v1.1.2/Drag-Trainer.exe`;
 
 const featuresV1 = [
   'Timed CPS tests from 0.5 to 60 seconds, left or right click, with history and a best score for each length',
   'Drag practice mode with no timer: it counts the clicks in each drag and draws a bar for each one, so you can see how consistent you are',
-  'Gap check: a bar for every click showing the pause before it, with a 50ms line, so you can see exactly where your clicking stalls. It tracks your longest gap, how steady you are and your longest clean run, and the coach says whether slow resets or fading drags are causing the gaps',
+  'Gap check: a bar for every click showing the pause before it, with a line for the longest pause that still counts as steady (100ms by default, adjustable in Settings), so you can see exactly where your clicking stalls. It tracks your longest gap, how steady you are and your longest clean run, and the coach says whether slow resets or fading drags are causing the gaps',
   'An optional bridge coach (in Settings) that also tells you whether your clicking is steady enough to god bridge in Minecraft',
   'A coach that reacts to every drag and writes a session report: inconsistent drags, drags that stall partway, fading as you tire, and whether slow resets are holding your CPS back',
   'Guided 10-minute practice sessions of 10 seconds dragging, 10 seconds resting, with a Windows notification when your next session is due and when to stop',
@@ -84,10 +84,10 @@ mount(
 
       <Group gap="sm">
         <Button component="a" href={downloadV11} color="blush" autoContrast size="md" leftSection={<IconDownload size={18} />}>
-          Download v1.1.1
+          Download v1.1.2
         </Button>
         <Button component="a" href={downloadV1} color="blush" variant="outline" size="md" leftSection={<IconDownload size={18} />}>
-          Download v1.0.1
+          Download v1.0.2
         </Button>
         <Button component="a" href={repo} target="_blank" rel="noopener noreferrer" color="tie.5" size="md" leftSection={<IconBrandGithub size={18} />}>
           View on GitHub

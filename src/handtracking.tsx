@@ -6,7 +6,7 @@ import KofiButton from './KofiButton';
 import Subpage from './Subpage';
 import classes from './Subpage.module.css';
 
-const download = 'https://github.com/urmamge/drag-trainer/releases/download/v1.1.1/Drag-Trainer.exe';
+const download = 'https://github.com/urmamge/drag-trainer/releases/download/v1.1.2/Drag-Trainer.exe';
 
 /** Condensed from the drag-trainer README's "Hand tracking setup". */
 const setup = [
@@ -243,7 +243,7 @@ mount(
 
       <Group gap="sm">
         <Button component="a" href={download} color="blush" autoContrast size="md" leftSection={<IconDownload size={18} />}>
-          Download v1.1.1
+          Download v1.1.2
         </Button>
       </Group>
     </Stack>
