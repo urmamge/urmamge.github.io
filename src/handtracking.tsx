@@ -6,21 +6,22 @@ import KofiButton from './KofiButton';
 import Subpage from './Subpage';
 import classes from './Subpage.module.css';
 
-const download = 'https://github.com/urmamge/drag-trainer/releases/download/v1.1.0/Drag-Trainer.exe';
+const download = 'https://github.com/urmamge/drag-trainer/releases/download/v1.1.1/Drag-Trainer.exe';
 
 /** Condensed from the drag-trainer README's "Hand tracking setup". */
 const setup = [
   <>
     <b>Connect your phone as a camera.</b> On Windows 11 with Android, link your phone in Settings → Bluetooth &
-    devices → Mobile devices. On any phone, a free webcam app like Iriun Webcam, DroidCam or Camo works. Turn on 60fps if
-    it has the option.
+    devices → Mobile devices. On any phone, a free webcam app like Iriun Webcam, DroidCam or Camo works. Turn on the highest
+    frame rate it offers.
   </>,
   <>
     <b>Place it</b> on its side, level with the top of your mouse and 20–30cm away, filming your clicking finger
     side-on. Keep your whole hand in shot, use good lighting, and prop it up so it can’t move.
   </>,
   <>
-    In Drag Trainer, click <b>Hand tracking</b>, pick your phone and press <b>Start camera</b>.
+    In Drag Trainer, click <b>Hand tracking</b>, pick your phone and its frame rate (30 to 240fps, as high as your
+    camera can do), and press <b>Start camera</b>.
   </>,
   <>
     <b>Calibrate</b> with <b>Mark back</b> and <b>Mark front</b>, as explained above.
@@ -31,13 +32,13 @@ const setup = [
 ];
 
 /** Each step of the hand tracking, in the order it happens. */
-const steps: { title: string; body: ReactNode[] }[] = [
+const steps: { title: string; body: ReactNode[]; image?: { src: string; alt: string } }[] = [
   {
     title: 'It finds your hand in the video',
     body: [
       <>
-        Drag Trainer uses <b>MediaPipe</b>, a free hand tracker made by Google. It looks at each frame of the video, up
-        to 60 times a second, and finds 21 points on your hand: your wrist, every knuckle and every fingertip. Join the
+        Drag Trainer uses <b>MediaPipe</b>, a free hand tracker made by Google. It looks at every frame of the video, up
+        to the frame rate you pick in the Hand tracking panel, and finds 21 points on your hand: your wrist, every knuckle and every fingertip. Join the
         dots and you get a stick-figure skeleton of your hand, which you can see drawn over the camera preview.
       </>,
       <>
@@ -137,7 +138,7 @@ const steps: { title: string; body: ReactNode[] }[] = [
 const limits = [
   'It can’t see how hard you’re pressing or the vibration in your finger, and those matter a lot. If your best and worst drags look the same on camera, the difference is probably pressure, and it’ll tell you so',
   'It needs a side-on view of your hand, so a webcam pointed at your face won’t work. A phone propped up beside your mouse works best',
-  'Fast drags need a good frame rate. Bright lighting and a 60fps camera setting help',
+  'Fast drags need a good frame rate. Bright lighting and the highest frame rate your camera supports help',
 ];
 
 const privacy = [
@@ -187,6 +188,7 @@ mount(
                     {line}
                   </Text>
                 ))}
+                {step.image && <img src={step.image.src} alt={step.image.alt} className={classes.screenshot} />}
               </Stack>
             </div>
           </div>
@@ -225,7 +227,7 @@ mount(
 
       <Group gap="sm">
         <Button component="a" href={download} color="blush" autoContrast size="md" leftSection={<IconDownload size={18} />}>
-          Download v1.1
+          Download v1.1.1
         </Button>
       </Group>
     </Stack>

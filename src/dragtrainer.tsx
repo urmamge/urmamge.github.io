@@ -9,12 +9,14 @@ import classes from './Subpage.module.css';
 
 const repo = 'https://github.com/urmamge/drag-trainer';
 /** Each version's Drag-Trainer.exe, straight from its GitHub release. */
-const downloadV1 = `${repo}/releases/download/v1.0.0/Drag-Trainer.exe`;
-const downloadV11 = `${repo}/releases/download/v1.1.0/Drag-Trainer.exe`;
+const downloadV1 = `${repo}/releases/download/v1.0.1/Drag-Trainer.exe`;
+const downloadV11 = `${repo}/releases/download/v1.1.1/Drag-Trainer.exe`;
 
 const featuresV1 = [
   'Timed CPS tests from 0.5 to 60 seconds, left or right click, with history and a best score for each length',
   'Drag practice mode with no timer: it counts the clicks in each drag and draws a bar for each one, so you can see how consistent you are',
+  'Gap check: a bar for every click showing the pause before it, with a 50ms line, so you can see exactly where your clicking stalls. It tracks your longest gap, how steady you are and your longest clean run, and the coach says whether slow resets or fading drags are causing the gaps',
+  'An optional bridge coach (in Settings) that also tells you whether your clicking is steady enough to god bridge in Minecraft',
   'A coach that reacts to every drag and writes a session report: inconsistent drags, drags that stall partway, fading as you tire, and whether slow resets are holding your CPS back',
   'Guided 10-minute practice sessions of 10 seconds dragging, 10 seconds resting, with a Windows notification when your next session is due and when to stop',
   'A built-in guide to drag clicking: which mice can do it, finger position, pressure, consistency, resets and grip tape',
@@ -24,7 +26,7 @@ const featuresV11 = [
   'Hand tracking: point your phone or webcam at your mouse hand, and after every drag the coach tells you your finger angle, where the drag started, how far and fast it went, and whether your fingertip lifted',
   'Learns what works for you: after 8 tracked drags it compares your best and worst drags, sums up what your best ones do differently, and marks where to start with a green circle',
   'Drag replays: turn on recording and it keeps your 3 best and 3 worst drags from each session, says what made each one good or bad, and plays them back in slow motion or frame by frame with every click marked. Each marking can be switched off to see just your hand',
-  'A phone camera setup guide inside the app',
+  'A phone camera setup guide inside the app, and a frame rate picker (30 to 240fps) for catching fast drags',
   'The video is analysed live on your PC and never sent anywhere. It’s only saved if you turn on recording, and then only as short clips on your PC'
 ];
 
@@ -82,10 +84,10 @@ mount(
 
       <Group gap="sm">
         <Button component="a" href={downloadV11} color="blush" autoContrast size="md" leftSection={<IconDownload size={18} />}>
-          Download v1.1
+          Download v1.1.1
         </Button>
         <Button component="a" href={downloadV1} color="blush" variant="outline" size="md" leftSection={<IconDownload size={18} />}>
-          Download v1.0
+          Download v1.0.1
         </Button>
         <Button component="a" href={repo} target="_blank" rel="noopener noreferrer" color="tie.5" size="md" leftSection={<IconBrandGithub size={18} />}>
           View on GitHub
@@ -162,6 +164,11 @@ mount(
       </div>
 
       <SimpleGrid cols={{ base: 1, sm: 2 }} spacing="lg">
+        <img
+          src="/screenshots/dragtrainer-gaps.png"
+          alt="Gap check mode: a bar for the gap before every click, with a 50ms line and the coach's report"
+          className={classes.screenshot}
+        />
         <img src="/screenshots/dragtrainer-timed.png" alt="A timed CPS test result" className={classes.screenshot} />
         <img src="/screenshots/dragtrainer-guide.png" alt="The built-in guide to drag clicking" className={classes.screenshot} />
       </SimpleGrid>
