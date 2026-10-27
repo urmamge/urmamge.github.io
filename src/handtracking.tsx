@@ -46,6 +46,10 @@ const steps: { title: string; body: ReactNode[]; image?: { src: string; alt: str
         that’s drawn in green.
       </>,
     ],
+    image: {
+      src: '/screenshots/dragtrainer-ht-tracking.png',
+      alt: 'A hand on a mouse with the tracked hand skeleton drawn over it, the clicking finger in green',
+    },
   },
   {
     title: 'You show it where the button is',
@@ -61,6 +65,10 @@ const steps: { title: string; body: ReactNode[]; image?: { src: string; alt: str
         that line, which is why you need to calibrate again if the camera moves.
       </>,
     ],
+    image: {
+      src: '/screenshots/dragtrainer-ht-calibrate.png',
+      alt: 'The Hand tracking panel after calibrating, with the Mark back and Mark front buttons and the live camera preview',
+    },
   },
   {
     title: 'It matches the video to your clicks',
@@ -116,6 +124,10 @@ const steps: { title: string; body: ReactNode[]; image?: { src: string; alt: str
         best drags means the tips fit you, not someone else.
       </>,
     ],
+    image: {
+      src: '/screenshots/dragtrainer-ht-coach.png',
+      alt: 'The coach after 15 tracked drags, comparing the best drags with the worst and saying where the best ones start',
+    },
   },
   {
     title: 'It can replay your drags (if you want)',
@@ -132,6 +144,10 @@ const steps: { title: string; body: ReactNode[]; image?: { src: string; alt: str
         screen.
       </>,
     ],
+    image: {
+      src: '/screenshots/dragtrainer-ht-replay.png',
+      alt: 'The Replays screen playing back a best drag frame by frame, with the click flash and what made it a good drag',
+    },
   },
 ];
 
