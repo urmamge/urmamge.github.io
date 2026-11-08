@@ -89,6 +89,27 @@ export const ogPages: OgPage[] = [
     icon: 'hand-finger',
   },
   {
+    html: 'apps/chatplus/index.html',
+    eyebrow: 'windows app',
+    title: 'Chat+',
+    text: 'Twitch and YouTube chat in one window, with a built-in OBS overlay.',
+    icon: 'messages',
+  },
+  {
+    html: 'apps/chatplus/privacy-policy/index.html',
+    eyebrow: 'chat+',
+    title: 'Privacy Policy',
+    text: 'How Chat+ handles your information.',
+    icon: 'shield-lock',
+  },
+  {
+    html: 'apps/chatplus/terms-of-service/index.html',
+    eyebrow: 'chat+',
+    title: 'Terms of Service',
+    text: 'The terms for using Chat+.',
+    icon: 'file-text',
+  },
+  {
     html: 'bots/index.html',
     eyebrow: 'bots',
     title: 'Bots',

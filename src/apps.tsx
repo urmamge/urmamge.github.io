@@ -1,5 +1,5 @@
 import { Button, SimpleGrid } from '@mantine/core';
-import { IconClock, IconHandClick, IconHeadphones, IconSalad } from '@tabler/icons-react';
+import { IconHandClick, IconHeadphones, IconMessages, IconSalad } from '@tabler/icons-react';
 import { mount } from './render';
 import KofiButton from './KofiButton';
 import Subpage from './Subpage';
@@ -45,8 +45,15 @@ mount(
       >
         Drag Trainer
       </Button>
-      <Button disabled className={classes.pluginButton} leftSection={<IconClock size={24} />}>
-        TBA
+      <Button
+        component="a"
+        href="/apps/chatplus/"
+        color="blush"
+        autoContrast
+        className={classes.pluginButton}
+        leftSection={<IconMessages size={24} />}
+      >
+        Chat+
       </Button>
     </SimpleGrid>
   </Subpage>,
