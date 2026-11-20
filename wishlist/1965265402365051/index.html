@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-GB" data-theme="haimiya">
+<!--
+  The wishlist page. Edit text here; christmastheme/index.html is built from this file
+  with the Mrs Claus colours (see christmasWishlist in vite.config.ts).
+  Styles: src/wishlist/wishlist.css. Script: src/wishlist/app.ts.
+  Data comes from the wishlist API Worker (repo urmamge/wishlist, wishlist-api.matthewhearst.com).
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Matthew's wishlist</title>
+<meta name="description" content="Everything I'd like, from every shop, in one place.">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="kicker" href="/">matthewhearst.com</a>
+    <h1>Matthew's wishlist</h1>
+    <p id="intro">The comprehensive list of everything I want, tapping a picture will open it.
+      If you buy something you can mark it as bought so that nobody doubles up. I can't see what's been marked, so the surprise is safe.</p>
+  </header>
+
+  <section id="owner" hidden>
+    <div class="ownerbar">
+      <span><strong>Owner view.</strong> Bought marks are hidden from you on this device.</span>
+      <button class="btn small" id="copyLink">Copy link</button>
+      <button class="btn small" id="copyXmas">Copy Christmas link</button>
+      <button class="btn small ghost" id="logout">Log out</button>
+    </div>
+    <div class="panel">
+      <form class="addrow" id="addForm">
+        <input type="url" id="addUrl" placeholder="Paste a product link" required autocomplete="off">
+        <button class="btn primary" id="addBtn">Get details</button>
+        <button class="btn" type="button" id="addPlain">Add without a link</button>
+      </form>
+      <div id="editor" hidden></div>
+    </div>
+  </section>
+
+  <p class="status" id="status">Loading…</p>
+  <div class="grid" id="grid"></div>
+  <p class="empty" id="empty" hidden>Nothing on the list yet.</p>
+</div>
+
+<dialog id="buyDialog">
+  <h3>Mark as bought?</h3>
+  <p id="buyName"></p>
+  <p>Everyone else viewing the list will see it's taken. Matthew won't. You can undo it from this device.</p>
+  <p class="err" id="buyErr"></p>
+  <div class="actions">
+    <button class="btn ghost" value="cancel" id="buyCancel">Cancel</button>
+    <button class="btn primary" id="buyConfirm">Yes, I've bought it</button>
+  </div>
+</dialog>
+
+<dialog id="loginDialog">
+  <h3>Owner login</h3>
+  <form id="loginForm">
+    <label for="loginKey">Owner code</label>
+    <input type="password" id="loginKey" autocomplete="current-password" required>
+    <p class="err" id="loginErr"></p>
+    <div class="actions">
+      <button class="btn ghost" type="button" id="loginCancel">Cancel</button>
+      <button class="btn primary">Log in</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status"></div>
+<script type="module" src="/src/wishlist/app.ts"></script>
+</body>
+</html>

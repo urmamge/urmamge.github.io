@@ -1,0 +1,187 @@
+/* Wishlist page (wishlist/<number>/). Two colour sets on the same layout: data-theme on <html>. */
+/* Haimiya: matthewhearst.com's palette (src/theme.ts in the website repo), flat background. */
+:root {
+  color-scheme: dark;
+  --bg: #242336;          /* navy 8 */
+  --page-ink: #ebeff2;    /* text straight on the background */
+  --page-muted: #c6c8ca;
+  --card: #2a2a3c;        /* navy 7 */
+  --field: #242336;
+  --ink: #ebeff2;
+  --muted: #c6c8ca;
+  --faint: #8b8d9c;
+  --line: #3b3d4c;
+  --accent: #ebbcbb;      /* blush 4 */
+  --accent-hover: #e4adaf;
+  --accent-ink: #242336;
+  --link: #88c6f5;        /* tie 2 */
+  --soft: #353747;
+  --good: #88c6f5;
+  --good-soft: #2a3850;
+  --danger: #e5484d;
+  --kicker: #ebbcbb;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .25), 0 6px 20px rgba(0, 0, 0, .2);
+}
+/* Christmas: the Mrs Claus skin (lady_slayer_xmas_mrs_claus.png): red coat, cream fur, brown boots. */
+:root[data-theme="christmas"] {
+  color-scheme: light;
+  --bg: #961220;
+  --page-ink: #fffdf8;
+  --page-muted: #f8dbd2;
+  --card: #fffdf8;
+  --field: #f6f1e8;
+  --ink: #1c1a20;
+  --muted: #59443c;
+  --faint: #8a7a70;
+  --line: #e8e4dc;
+  --accent: #c81e2d;
+  --accent-hover: #b12330;
+  --accent-ink: #fffdf8;
+  --link: #b12330;
+  --soft: #fffdf8;
+  --good: #59443c;
+  --good-soft: #f1e9df;
+  --danger: #b12330;
+  --kicker: #ebbcbb;
+  --shadow: 0 1px 2px rgba(60, 0, 8, .25), 0 8px 24px rgba(60, 0, 8, .25);
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 Outfit, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+a { color: inherit; }
+button, input, textarea { font: inherit; color: inherit; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 40px 16px 64px; }
+header .kicker {
+  font-family: Silkscreen, monospace; letter-spacing: .04em; text-transform: lowercase;
+  color: var(--kicker); text-decoration: none; font-size: .9rem; display: inline-block; margin-bottom: 6px;
+}
+header .kicker:hover { text-decoration: underline; }
+header h1 {
+  color: var(--page-ink);
+  font-weight: 700;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.1;
+  margin: 0 0 10px;
+  letter-spacing: -0.01em;
+}
+header p { margin: 0; color: var(--page-muted); max-width: 60ch; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  padding: 8px 14px; border-radius: 999px; cursor: pointer; font-weight: 500; font-size: .92rem;
+  transition: background .15s, border-color .15s, transform .05s;
+}
+.btn:hover { border-color: var(--faint); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .55; cursor: default; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.btn.ghost { background: transparent; }
+.btn.small { padding: 5px 10px; font-size: .85rem; }
+.btn.danger { color: var(--danger); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.ownerbar {
+  margin-top: 24px; padding: 12px 16px; border-radius: 14px;
+  background: var(--soft); color: var(--ink); display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+}
+.ownerbar span { flex: 1 1 260px; font-size: .92rem; }
+
+.panel {
+  margin-top: 16px; background: var(--card); border: 1px solid var(--line);
+  border-radius: 16px; padding: 16px; box-shadow: var(--shadow);
+}
+.addrow { display: flex; gap: 8px; flex-wrap: wrap; }
+.addrow input { flex: 1 1 240px; }
+input[type=text], input[type=url], input[type=password], textarea {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
+  background: var(--field);
+}
+textarea { resize: vertical; min-height: 60px; }
+label { display: block; font-size: .85rem; color: var(--muted); margin: 12px 0 4px; }
+.editor { display: grid; grid-template-columns: 160px 1fr; gap: 16px; margin-top: 12px; }
+.editor .pic {
+  width: 160px; aspect-ratio: 1; border-radius: 12px; background: var(--field);
+  border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; color: var(--muted); font-size: .85rem;
+}
+.editor .pic img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.editor .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+.editor .actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.hint { font-size: .85rem; color: var(--muted); margin: 8px 0 0; }
+.hint.warn { color: var(--link); }
+@media (max-width: 560px) {
+  .editor { grid-template-columns: 1fr; }
+  .editor .pic { width: 100%; max-width: 220px; }
+  .editor .row2 { grid-template-columns: 1fr; }
+}
+
+.grid {
+  margin-top: 28px; display: grid; gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+.card {
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden;
+  display: flex; flex-direction: column; box-shadow: var(--shadow); transition: transform .15s, box-shadow .15s;
+}
+.card:hover { transform: translateY(-2px); }
+.card .img {
+  display: block; aspect-ratio: 1; background: #fff; position: relative;
+  border-bottom: 1px solid var(--line);
+}
+.card .img img { width: 100%; height: 100%; object-fit: contain; padding: 14px; display: block; }
+.card .img .noimg {
+  position: absolute; inset: 0; display: grid; place-items: center; color: var(--faint);
+  font-family: Silkscreen, monospace; font-size: 2.6rem; background: var(--field);
+}
+.card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card .meta { display: flex; justify-content: space-between; gap: 8px; font-size: .82rem; color: var(--muted); }
+.card .price { font-weight: 600; color: var(--ink); font-size: .95rem; }
+.card h2 { font-size: 1rem; font-weight: 600; margin: 0; line-height: 1.35; }
+.card h2 a { text-decoration: none; }
+.card h2 a:hover { text-decoration: underline; color: var(--link); }
+.card .note { font-size: .88rem; color: var(--muted); margin: 0; white-space: pre-wrap; }
+.card .foot { margin-top: auto; padding-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.card .foot .btn { flex: 1 1 auto; }
+@media (max-width: 560px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .card .img img { padding: 8px; }
+  .card .body { padding: 10px 12px 12px; }
+  .card h2 { font-size: .92rem; }
+  .card .meta { flex-direction: column; gap: 0; }
+  .card .foot .btn { padding: 6px 8px; font-size: .82rem; }
+}
+.card.bought { opacity: .6; }
+.card.bought:hover { opacity: .85; }
+.badge {
+  position: absolute; top: 10px; left: 10px; background: var(--good-soft); color: var(--good);
+  font-size: .78rem; font-weight: 600; padding: 4px 10px; border-radius: 999px; border: 1px solid currentColor;
+}
+.boughtnote { font-size: .85rem; color: var(--good); font-weight: 500; flex: 1 1 100%; }
+.undo { background: none; border: 0; padding: 0; color: var(--muted); text-decoration: underline; cursor: pointer; font-size: .85rem; }
+
+.empty { margin-top: 40px; text-align: center; color: var(--page-muted); }
+.status { margin-top: 28px; color: var(--page-muted); }
+
+dialog {
+  border: 1px solid var(--line); border-radius: 16px; padding: 22px; max-width: min(420px, calc(100vw - 32px));
+  background: var(--card); color: var(--ink); box-shadow: var(--shadow);
+}
+dialog::backdrop { background: rgba(0, 0, 0, .4); }
+dialog h3 { margin: 0 0 8px; font-weight: 700; font-size: 1.3rem; }
+dialog p { margin: 0 0 6px; color: var(--muted); }
+dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; flex-wrap: wrap; }
+dialog .err { color: var(--danger); font-size: .88rem; min-height: 1.2em; margin: 8px 0 0; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%) translateY(20px);
+  background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-size: .9rem;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; max-width: calc(100vw - 32px);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+[hidden] { display: none !important; }

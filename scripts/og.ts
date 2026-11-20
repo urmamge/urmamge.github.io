@@ -121,6 +121,7 @@ try {
   for (const page of ogPages) {
     const name = ogImageName(page);
     if (only && name !== only) continue;
+    if (page.imageUrl) continue; // drawn live elsewhere (see OgPage.imageUrl)
     const htmlFile = join(work, `${name}.html`);
     writeFileSync(
       htmlFile,

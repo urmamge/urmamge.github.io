@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { relative, resolve } from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig, type Plugin } from 'vite'
@@ -20,7 +20,7 @@ function linkPreviews(): Plugin {
       const page = ogPageFor(file)
       if (!page) throw new Error(`${file} has no link preview. Add it to scripts/og-pages.ts and run npm run og.`)
       const image = `og/${ogImageName(page)}.png`
-      if (!existsSync(resolve(import.meta.dirname, 'public', image))) {
+      if (!page.imageUrl && !existsSync(resolve(import.meta.dirname, 'public', image))) {
         throw new Error(`public/${image} is missing. Run npm run og.`)
       }
 
@@ -32,7 +32,7 @@ function linkPreviews(): Plugin {
         property('og:site_name', 'Matthew Hearst'),
         property('og:title', title),
         property('og:description', description),
-        property('og:image', `${siteUrl}/${image}`),
+        property('og:image', page.imageUrl ?? `${siteUrl}/${image}`),
         property('og:image:width', '1200'),
         property('og:image:height', '630'),
         property('og:image:alt', `${page.title}: ${page.text}`),
@@ -45,9 +45,34 @@ function linkPreviews(): Plugin {
   }
 }
 
+/** The wishlist's unlisted path. Changing it breaks links already sent to people. */
+const wishlistDir = 'wishlist/1965265402365051'
+
+/**
+ * The Christmas wishlist is the normal wishlist page with the Mrs Claus colours, so its own
+ * index.html is a stub: this swaps in the main page's HTML with data-theme="christmas".
+ */
+function christmasWishlist(): Plugin {
+  const main = resolve(import.meta.dirname, wishlistDir, 'index.html')
+  return {
+    name: 'christmas-wishlist',
+    transformIndexHtml: {
+      order: 'pre',
+      handler(html, ctx) {
+        const file = relative(import.meta.dirname, ctx.filename).replaceAll('\\', '/')
+        if (file !== `${wishlistDir}/christmastheme/index.html`) return html
+        const page = readFileSync(main, 'utf8')
+        const themed = page.replace('data-theme="haimiya"', 'data-theme="christmas"')
+        if (themed === page) throw new Error(`${wishlistDir}/index.html is missing data-theme="haimiya"`)
+        return themed
+      },
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), linkPreviews()],
+  plugins: [react(), christmasWishlist(), linkPreviews()],
   // Fixed port so the VS Code "Run website" launch config always finds it.
   server: { port: 5173, strictPort: true },
   build: {
@@ -74,6 +99,8 @@ export default defineConfig({
         overwatchbotTerms: resolve(import.meta.dirname, 'bots/overwatchbot/terms-of-service/index.html'),
         repos: resolve(import.meta.dirname, 'repos/index.html'),
         youdiedmc: resolve(import.meta.dirname, 'youdiedmc/index.html'),
+        wishlist: resolve(import.meta.dirname, wishlistDir, 'index.html'),
+        wishlistChristmas: resolve(import.meta.dirname, wishlistDir, 'christmastheme/index.html'),
       },
     },
   },

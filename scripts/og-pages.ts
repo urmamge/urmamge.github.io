@@ -11,6 +11,11 @@ export interface OgPage {
   icon: string;
   /** 'online' uses the pixel font like /urmamge, 'lost' is the 404 page, 'died' is /youdiedmc. */
   theme?: 'online' | 'lost' | 'died';
+  /**
+   * A live preview image drawn elsewhere instead of one rendered into public/og (npm run og skips it).
+   * The wishlist uses its Worker, which draws this same card design with the top item on the list.
+   */
+  imageUrl?: string;
 }
 
 export const siteUrl = 'https://matthewhearst.com';
@@ -143,6 +148,22 @@ export const ogPages: OgPage[] = [
     title: 'Repos',
     text: 'My public GitHub repos.',
     icon: 'folder-code',
+  },
+  {
+    html: 'wishlist/1965265402365051/index.html',
+    eyebrow: 'wishlist',
+    title: "Matthew's wishlist",
+    text: 'Everything I want, from every shop, in one place.',
+    icon: 'gift',
+    imageUrl: 'https://wishlist-api.matthewhearst.com/og.png',
+  },
+  {
+    html: 'wishlist/1965265402365051/christmastheme/index.html',
+    eyebrow: 'christmas wishlist',
+    title: "Matthew's wishlist",
+    text: 'Everything I want this Christmas, from every shop, in one place.',
+    icon: 'gift',
+    imageUrl: 'https://wishlist-api.matthewhearst.com/og.png?theme=christmas',
   },
   {
     html: '404.html',
