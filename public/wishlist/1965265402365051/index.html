@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme="haimiya">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,37 +13,53 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Silkscreen&display=swap" rel="stylesheet">
 <style>
+/* Haimiya: matthewhearst.com's palette (src/theme.ts in the website repo), flat background. */
 :root {
-  --bg: #faf7f2;
-  --card: #ffffff;
-  --ink: #1f1b16;
-  --muted: #6f665c;
-  --line: #e8e1d6;
-  --accent: #c2410c;
-  --accent-ink: #ffffff;
-  --soft: #fdf0e7;
-  --good: #15803d;
-  --good-soft: #e9f7ee;
-  --danger: #b91c1c;
-  --shadow: 0 1px 2px rgba(31, 27, 22, .06), 0 4px 16px rgba(31, 27, 22, .06);
+  color-scheme: dark;
+  --bg: #242336;          /* navy 8 */
+  --page-ink: #ebeff2;    /* text straight on the background */
+  --page-muted: #c6c8ca;
+  --card: #2a2a3c;        /* navy 7 */
+  --field: #242336;
+  --ink: #ebeff2;
+  --muted: #c6c8ca;
+  --faint: #8b8d9c;
+  --line: #3b3d4c;
+  --accent: #ebbcbb;      /* blush 4 */
+  --accent-hover: #e4adaf;
+  --accent-ink: #242336;
+  --link: #88c6f5;        /* tie 2 */
+  --soft: #353747;
+  --good: #88c6f5;
+  --good-soft: #2a3850;
+  --danger: #e5484d;
+  --kicker: #ebbcbb;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .25), 0 6px 20px rgba(0, 0, 0, .2);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #161412;
-    --card: #211e1b;
-    --ink: #f3eee7;
-    --muted: #a99f93;
-    --line: #353029;
-    --accent: #fb923c;
-    --accent-ink: #1c1208;
-    --soft: #2c221b;
-    --good: #4ade80;
-    --good-soft: #1b2a20;
-    --danger: #f87171;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 16px rgba(0, 0, 0, .25);
-  }
+/* Christmas: the Mrs Claus skin (lady_slayer_xmas_mrs_claus.png): red coat, cream fur, brown boots. */
+:root[data-theme="christmas"] {
+  color-scheme: light;
+  --bg: #961220;
+  --page-ink: #fffdf8;
+  --page-muted: #f8dbd2;
+  --card: #fffdf8;
+  --field: #f6f1e8;
+  --ink: #1c1a20;
+  --muted: #59443c;
+  --faint: #8a7a70;
+  --line: #e8e4dc;
+  --accent: #c81e2d;
+  --accent-hover: #b12330;
+  --accent-ink: #fffdf8;
+  --link: #b12330;
+  --soft: #fffdf8;
+  --good: #59443c;
+  --good-soft: #f1e9df;
+  --danger: #b12330;
+  --kicker: #ebbcbb;
+  --shadow: 0 1px 2px rgba(60, 0, 8, .25), 0 8px 24px rgba(60, 0, 8, .25);
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
@@ -51,20 +67,25 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font: 16px/1.5 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  font: 16px/1.5 Outfit, system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 a { color: inherit; }
 button, input, textarea { font: inherit; color: inherit; }
 .wrap { max-width: 1120px; margin: 0 auto; padding: 40px 16px 64px; }
+header .kicker {
+  font-family: Silkscreen, monospace; letter-spacing: .04em; text-transform: lowercase;
+  color: var(--kicker); text-decoration: none; font-size: .9rem; display: inline-block; margin-bottom: 6px;
+}
+header .kicker:hover { text-decoration: underline; }
 header h1 {
-  font-family: Fraunces, Georgia, serif;
-  font-weight: 600;
+  color: var(--page-ink);
+  font-weight: 700;
   font-size: clamp(2rem, 6vw, 3rem);
   line-height: 1.1;
   margin: 0 0 10px;
   letter-spacing: -0.01em;
 }
-header p { margin: 0; color: var(--muted); max-width: 60ch; }
+header p { margin: 0; color: var(--page-muted); max-width: 60ch; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -72,11 +93,11 @@ header p { margin: 0; color: var(--muted); max-width: 60ch; }
   padding: 8px 14px; border-radius: 999px; cursor: pointer; font-weight: 500; font-size: .92rem;
   transition: background .15s, border-color .15s, transform .05s;
 }
-.btn:hover { border-color: var(--muted); }
+.btn:hover { border-color: var(--faint); }
 .btn:active { transform: translateY(1px); }
 .btn:disabled { opacity: .55; cursor: default; }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-.btn.primary:hover { filter: brightness(1.05); }
+.btn.primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
 .btn.ghost { background: transparent; }
 .btn.small { padding: 5px 10px; font-size: .85rem; }
 .btn.danger { color: var(--danger); }
@@ -84,7 +105,7 @@ header p { margin: 0; color: var(--muted); max-width: 60ch; }
 
 .ownerbar {
   margin-top: 24px; padding: 12px 16px; border-radius: 14px;
-  background: var(--soft); display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+  background: var(--soft); color: var(--ink); display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
 }
 .ownerbar span { flex: 1 1 260px; font-size: .92rem; }
 
@@ -96,20 +117,20 @@ header p { margin: 0; color: var(--muted); max-width: 60ch; }
 .addrow input { flex: 1 1 240px; }
 input[type=text], input[type=url], input[type=password], textarea {
   width: 100%; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px;
-  background: var(--bg);
+  background: var(--field);
 }
 textarea { resize: vertical; min-height: 60px; }
 label { display: block; font-size: .85rem; color: var(--muted); margin: 12px 0 4px; }
 .editor { display: grid; grid-template-columns: 160px 1fr; gap: 16px; margin-top: 12px; }
 .editor .pic {
-  width: 160px; aspect-ratio: 1; border-radius: 12px; background: var(--bg);
+  width: 160px; aspect-ratio: 1; border-radius: 12px; background: var(--field);
   border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; color: var(--muted); font-size: .85rem;
 }
 .editor .pic img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
 .editor .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
 .editor .actions { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
 .hint { font-size: .85rem; color: var(--muted); margin: 8px 0 0; }
-.hint.warn { color: var(--accent); }
+.hint.warn { color: var(--link); }
 @media (max-width: 560px) {
   .editor { grid-template-columns: 1fr; }
   .editor .pic { width: 100%; max-width: 220px; }
@@ -131,15 +152,15 @@ label { display: block; font-size: .85rem; color: var(--muted); margin: 12px 0 4
 }
 .card .img img { width: 100%; height: 100%; object-fit: contain; padding: 14px; display: block; }
 .card .img .noimg {
-  position: absolute; inset: 0; display: grid; place-items: center; color: #8a8178;
-  font-family: Fraunces, Georgia, serif; font-size: 2.4rem; background: var(--soft);
+  position: absolute; inset: 0; display: grid; place-items: center; color: var(--faint);
+  font-family: Silkscreen, monospace; font-size: 2.6rem; background: var(--field);
 }
 .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
 .card .meta { display: flex; justify-content: space-between; gap: 8px; font-size: .82rem; color: var(--muted); }
 .card .price { font-weight: 600; color: var(--ink); font-size: .95rem; }
 .card h2 { font-size: 1rem; font-weight: 600; margin: 0; line-height: 1.35; }
 .card h2 a { text-decoration: none; }
-.card h2 a:hover { text-decoration: underline; }
+.card h2 a:hover { text-decoration: underline; color: var(--link); }
 .card .note { font-size: .88rem; color: var(--muted); margin: 0; white-space: pre-wrap; }
 .card .foot { margin-top: auto; padding-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
 .card .foot .btn { flex: 1 1 auto; }
@@ -160,15 +181,15 @@ label { display: block; font-size: .85rem; color: var(--muted); margin: 12px 0 4
 .boughtnote { font-size: .85rem; color: var(--good); font-weight: 500; flex: 1 1 100%; }
 .undo { background: none; border: 0; padding: 0; color: var(--muted); text-decoration: underline; cursor: pointer; font-size: .85rem; }
 
-.empty { margin-top: 40px; text-align: center; color: var(--muted); }
-.status { margin-top: 28px; color: var(--muted); }
+.empty { margin-top: 40px; text-align: center; color: var(--page-muted); }
+.status { margin-top: 28px; color: var(--page-muted); }
 
 dialog {
   border: 1px solid var(--line); border-radius: 16px; padding: 22px; max-width: min(420px, calc(100vw - 32px));
   background: var(--card); color: var(--ink); box-shadow: var(--shadow);
 }
 dialog::backdrop { background: rgba(0, 0, 0, .4); }
-dialog h3 { margin: 0 0 8px; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 1.3rem; }
+dialog h3 { margin: 0 0 8px; font-weight: 700; font-size: 1.3rem; }
 dialog p { margin: 0 0 6px; color: var(--muted); }
 dialog .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; flex-wrap: wrap; }
 dialog .err { color: var(--danger); font-size: .88rem; min-height: 1.2em; margin: 8px 0 0; }
@@ -185,6 +206,7 @@ dialog .err { color: var(--danger); font-size: .88rem; min-height: 1.2em; margin
 <body>
 <div class="wrap">
   <header>
+    <a class="kicker" href="/">matthewhearst.com</a>
     <h1>Matthew's wishlist</h1>
     <p id="intro">Everything I'd like, from every shop, in one place. Tap a picture or name to open it in the shop.
       If you buy something, mark it as bought so nobody doubles up. I can't see what's been marked, so the surprise is safe.</p>
@@ -193,13 +215,15 @@ dialog .err { color: var(--danger); font-size: .88rem; min-height: 1.2em; margin
   <section id="owner" hidden>
     <div class="ownerbar">
       <span><strong>Owner view.</strong> Bought marks are hidden from you on this device.</span>
-      <button class="btn small" id="copyLink">Copy share link</button>
+      <button class="btn small" id="copyLink">Copy link</button>
+      <button class="btn small" id="copyXmas">Copy Christmas link</button>
       <button class="btn small ghost" id="logout">Log out</button>
     </div>
     <div class="panel">
       <form class="addrow" id="addForm">
         <input type="url" id="addUrl" placeholder="Paste a product link" required autocomplete="off">
         <button class="btn primary" id="addBtn">Get details</button>
+        <button class="btn" type="button" id="addPlain">Add without a link</button>
       </form>
       <div id="editor" hidden></div>
     </div>
@@ -235,7 +259,7 @@ dialog .err { color: var(--danger); font-size: .88rem; min-height: 1.2em; margin
 </dialog>
 
 <div class="toast" id="toast" role="status"></div>
-<script>"use strict";(()=>{var z=["localhost","127.0.0.1"].includes(location.hostname),R=z?"http://localhost:18799":"https://wishlist-api.matthewhearst.com",I="wishlist-owner-key",B="wishlist-claims",W=null;function H(){try{return localStorage.getItem(I)}catch{return W}}function w(t){W=t;try{t?localStorage.setItem(I,t):localStorage.removeItem(I)}catch{}}var $={};function D(){try{return JSON.parse(localStorage.getItem(B)??"{}")}catch{return $}}function F(t,e){let a={...D()};e?a[t]=e:delete a[t],$=a;try{localStorage.setItem(B,JSON.stringify(a))}catch{}}var s=t=>document.getElementById(t);function i(t,e={},...a){let n=document.createElement(t);for(let[r,l]of Object.entries(e))l==null||l===!1||(r.startsWith("on")&&typeof l=="function"?n.addEventListener(r.slice(2),l):r==="class"?n.className=String(l):r in n&&r!=="list"?n[r]=l:n.setAttribute(r,String(l)));for(let r of a)r&&n.append(r);return n}var L=class extends Error{constructor(a,n){super(n);this.status=a}};async function u(t,e={}){let a=new Headers(e.headers),n=H();n&&a.set("X-Owner-Key",n);let r=e.body;e.json!==void 0&&(a.set("Content-Type","application/json"),r=JSON.stringify(e.json));let l;try{l=await fetch(R+t,{...e,headers:a,body:r})}catch{throw new L(0,"Couldn't reach the wishlist. Check your connection and try again.")}let d=await l.json().catch(()=>({}));if(!l.ok)throw new L(l.status,d.error??"Something went wrong.");return d}function M(t){return t?t.startsWith("/img/")?R+t:t:null}var j=0;function c(t){let e=s("toast");e.textContent=t,e.classList.add("show"),clearTimeout(j),j=window.setTimeout(()=>e.classList.remove("show"),2600)}var m=!1,o=[];async function p(){try{let t=H(),e=await u("/api/items");t&&!e.owner&&(w(null),c("Owner code changed, log in again.")),m=e.owner,o=e.items,s("status").hidden=!0,v()}catch(t){s("status").hidden=!1,s("status").textContent=t.message}}function v(){s("owner").hidden=!m;let t=s("grid");t.replaceChildren(),(m?o:[...o.filter(a=>!a.bought),...o.filter(a=>a.bought)]).forEach(a=>t.append(G(a))),s("empty").hidden=o.length>0}function G(t){let e=M(t.image),n=!!D()[t.id],r=!m&&t.bought,l=i("a",{class:"img",href:t.url,target:"_blank",rel:"noopener noreferrer","aria-label":`Open ${t.title}`},e?i("img",{src:e,alt:"",loading:"lazy",referrerPolicy:"no-referrer",onerror:V}):i("div",{class:"noimg"},t.title.charAt(0).toUpperCase()),r&&i("span",{class:"badge"},"Bought")),d=i("div",{class:"foot"});if(m){let g=o.indexOf(t);d.append(i("button",{class:"btn small",onclick:()=>_(t)},"Edit"),i("button",{class:"btn small",title:"Move earlier",disabled:g===0,onclick:()=>K(t,-1)},"\u2191"),i("button",{class:"btn small",title:"Move later",disabled:g===o.length-1,onclick:()=>K(t,1)},"\u2193"),i("button",{class:"btn small danger",onclick:()=>tt(t)},"Delete"))}else r?(d.append(i("span",{class:"boughtnote"},n?"You marked this as bought.":"Someone's already got this one.")),n&&d.append(i("button",{class:"undo",onclick:()=>Q(t)},"Undo"))):d.append(i("button",{class:"btn",onclick:()=>X(t)},"Mark as bought"));return i("article",{class:r?"card bought":"card"},l,i("div",{class:"body"},i("div",{class:"meta"},i("span",{},t.site??""),t.price&&i("span",{class:"price"},t.price)),i("h2",{},i("a",{href:t.url,target:"_blank",rel:"noopener noreferrer"},t.title)),t.note&&i("p",{class:"note"},t.note),d))}function V(){let e=this.parentElement?.getAttribute("aria-label")?.replace(/^Open /,"")??"?";this.replaceWith(i("div",{class:"noimg"},e.charAt(0).toUpperCase()))}var S=null;function X(t){S=t,s("buyName").textContent=t.title,s("buyErr").textContent="",s("buyConfirm").disabled=!1,s("buyDialog").showModal()}s("buyCancel").addEventListener("click",()=>s("buyDialog").close());s("buyConfirm").addEventListener("click",async()=>{if(!S)return;let t=S,e=s("buyConfirm");e.disabled=!0;try{let{claim:a}=await u(`/api/items/${t.id}/buy`,{method:"POST"});F(t.id,a),t.bought=!0,s("buyDialog").close(),v(),c("Marked as bought. Thank you!")}catch(a){e.disabled=!1,s("buyErr").textContent=a.message,(a.status===409||a.status===404)&&p()}});async function Q(t){let e=D()[t.id];if(e)try{await u(`/api/items/${t.id}/unbuy`,{method:"POST",json:{claim:e}}),F(t.id,null),t.bought=!1,v(),c("Undone. It\u2019s back on the list.")}catch(a){c(a.message)}}function Z(){s("loginErr").textContent="",s("loginKey").value="",s("loginDialog").showModal()}s("loginCancel").addEventListener("click",()=>s("loginDialog").close());s("loginForm").addEventListener("submit",async t=>{t.preventDefault();let e=s("loginKey").value.trim(),a=H();w(e);try{await u("/api/login",{method:"POST"}),s("loginDialog").close(),history.replaceState(null,"",location.pathname+location.search),await p(),c("Logged in. Bought marks are now hidden on this device.")}catch(n){w(a),s("loginErr").textContent=n.status===401?"That code isn't right.":n.message}});s("logout").addEventListener("click",()=>{w(null),U(),p()});s("copyLink").addEventListener("click",async()=>{let t=location.origin+location.pathname;try{await navigator.clipboard.writeText(t),c("Link copied.")}catch{prompt("Copy this link:",t)}});s("addForm").addEventListener("submit",async t=>{t.preventDefault();let e=s("addUrl").value.trim(),a=s("addBtn");a.disabled=!0,a.textContent="Fetching\u2026";try{let n=await u("/api/preview",{method:"POST",json:{url:e}});_(null,{url:e,title:n.title??"",site:n.site,price:n.price??"",note:"",imageUrl:n.image??""},n.blocked)}catch(n){c(n.message)}finally{a.disabled=!1,a.textContent="Get details"}});function U(){let t=s("editor");t.hidden=!0,t.replaceChildren()}function _(t,e,a=!1){let n=e??{url:t.url,title:t.title,site:t.site??"",price:t.price??"",note:t.note??"",imageUrl:t.image??""},r=null,l=(h,y)=>i("div",{},i("label",{htmlFor:y.id},h),y),d=i("input",{type:"url",id:"edUrl",value:n.url,required:!0}),g=i("input",{type:"text",id:"edTitle",value:n.title,required:!0,maxLength:300}),O=i("input",{type:"text",id:"edPrice",value:n.price,placeholder:"\xA30.00",maxLength:50}),P=i("input",{type:"text",id:"edSite",value:n.site,maxLength:100}),k=i("textarea",{id:"edNote",placeholder:"Size, colour, anything they should know",maxLength:500});k.value=n.note;let f=i("input",{type:"text",id:"edImage",value:n.imageUrl.startsWith("/img/")?"":n.imageUrl,placeholder:n.imageUrl.startsWith("/img/")?"Saved picture (paste a link to replace)":"Picture link"}),E=i("input",{type:"file",accept:"image/*",hidden:!0}),A=i("div",{class:"pic"}),T=h=>{A.replaceChildren(h?i("img",{src:h,alt:"",referrerPolicy:"no-referrer"}):"No picture")};T(M(n.imageUrl||null)),f.addEventListener("input",()=>{r=null,T(f.value.trim()||M(n.imageUrl.startsWith("/img/")?n.imageUrl:null))}),E.addEventListener("change",()=>{r=E.files?.[0]??null,r&&(f.value="",T(URL.createObjectURL(r)))});let C=i("button",{class:"btn primary",type:"submit"},t?"Save changes":"Add to list"),J=i("form",{class:"editor",onsubmit:async h=>{h.preventDefault(),C.disabled=!0;let y=f.value.trim(),Y=!y&&!r&&n.imageUrl.startsWith("/img/"),N={url:d.value.trim(),title:g.value.trim(),price:O.value.trim(),site:P.value.trim(),note:k.value.trim(),imageUrl:r?t?t.image:null:Y?n.imageUrl:y||null};try{let b=t?.id;t?await u(`/api/items/${t.id}`,{method:"PATCH",json:N}):b=(await u("/api/items",{method:"POST",json:N})).id,r&&b&&await u(`/api/items/${b}/image`,{method:"PUT",body:r,headers:{"Content-Type":r.type}}),U(),s("addUrl").value="",await p(),c(t?"Saved.":"Added to the list.")}catch(b){c(b.message),C.disabled=!1}}},i("div",{},A,i("button",{class:"btn small",type:"button",style:"margin-top:8px;width:100%",onclick:()=>E.click()},"Upload picture"),E),i("div",{},a&&i("p",{class:"hint warn"},"That shop didn't let me read the page, so fill in the details yourself. Right-click the product picture \u2192 Copy image address, or save it and use Upload picture."),l("Name",g),i("div",{class:"row2"},l("Price",O),l("Shop",P)),l("Note (optional)",k),l("Picture link",f),l("Link",d),i("div",{class:"actions"},C,i("button",{class:"btn ghost",type:"button",onclick:U},"Cancel")))),x=s("editor");x.replaceChildren(J),x.hidden=!1,x.scrollIntoView({behavior:"smooth",block:"nearest"}),g.focus()}async function K(t,e){let a=o.indexOf(t),n=a+e;if(!(n<0||n>=o.length)){o.splice(a,1),o.splice(n,0,t),v();try{await u("/api/order",{method:"POST",json:{ids:o.map(r=>r.id)}})}catch(r){c(r.message),p()}}}async function tt(t){if(confirm(`Delete "${t.title}" from the list?`))try{await u(`/api/items/${t.id}`,{method:"DELETE"}),o=o.filter(e=>e!==t),v(),c("Deleted.")}catch(e){c(e.message)}}function q(){location.hash==="#owner"&&!m&&Z()}window.addEventListener("hashchange",q);p().then(q);})();
+<script>"use strict";(()=>{var V=["localhost","127.0.0.1"].includes(location.hostname),A=V?"http://localhost:18799":"https://wishlist-api.matthewhearst.com",I="wishlist-owner-key",B="wishlist-claims",W=null;function D(){try{return localStorage.getItem(I)}catch{return W}}function k(t){W=t;try{t?localStorage.setItem(I,t):localStorage.removeItem(I)}catch{}}var F={};function O(){try{return JSON.parse(localStorage.getItem(B)??"{}")}catch{return F}}function J(t,e){let s={...O()};e?s[t]=e:delete s[t],F=s;try{localStorage.setItem(B,JSON.stringify(s))}catch{}}var a=t=>document.getElementById(t);function i(t,e={},...s){let n=document.createElement(t);for(let[l,r]of Object.entries(e))r==null||r===!1||(l.startsWith("on")&&typeof r=="function"?n.addEventListener(l.slice(2),r):l==="class"?n.className=String(r):l in n&&l!=="list"?n[l]=r:n.setAttribute(l,String(r)));for(let l of s)l&&n.append(l);return n}var L=class extends Error{constructor(s,n){super(n);this.status=s}};async function d(t,e={}){let s=new Headers(e.headers),n=D();n&&s.set("X-Owner-Key",n);let l=e.body;e.json!==void 0&&(s.set("Content-Type","application/json"),l=JSON.stringify(e.json));let r;try{r=await fetch(A+t,{...e,headers:s,body:l})}catch{throw new L(0,"Couldn't reach the wishlist. Check your connection and try again.")}let h=await r.json().catch(()=>({}));if(!r.ok)throw new L(r.status,h.error??"Something went wrong.");return h}function S(t){return t?t.startsWith("/img/")?A+t:t:null}var R=0;function c(t){let e=a("toast");e.textContent=t,e.classList.add("show"),clearTimeout(R),R=window.setTimeout(()=>e.classList.remove("show"),2600)}var p=!1,o=[];async function f(){try{let t=D(),e=await d("/api/items");t&&!e.owner&&(k(null),c("Owner code changed, log in again.")),p=e.owner,o=e.items,a("status").hidden=!0,w()}catch(t){a("status").hidden=!1,a("status").textContent=t.message}}function w(){a("owner").hidden=!p;let t=a("grid");t.replaceChildren(),(p?o:[...o.filter(s=>!s.bought),...o.filter(s=>s.bought)]).forEach(s=>t.append(Q(s))),a("empty").hidden=o.length>0}function Q(t){let e=S(t.image),n=!!O()[t.id],l=!p&&t.bought,r=g=>t.url?{...g,href:t.url,target:"_blank",rel:"noopener noreferrer"}:g,h=i(t.url?"a":"div",r({class:"img","data-title":t.title,"aria-label":t.url?`Open ${t.title}`:void 0}),e?i("img",{src:e,alt:"",loading:"lazy",referrerPolicy:"no-referrer",onerror:Z}):Y(),l&&i("span",{class:"badge"},"Bought")),u=i("div",{class:"foot"});if(p){let g=o.indexOf(t);u.append(i("button",{class:"btn small",onclick:()=>P(t)},"Edit"),i("button",{class:"btn small",title:"Move earlier",disabled:g===0,onclick:()=>$(t,-1)},"\u2191"),i("button",{class:"btn small",title:"Move later",disabled:g===o.length-1,onclick:()=>$(t,1)},"\u2193"),i("button",{class:"btn small danger",onclick:()=>it(t)},"Delete"))}else l?(u.append(i("span",{class:"boughtnote"},n?"You marked this as bought.":"Someone's already got this one.")),n&&u.append(i("button",{class:"undo",onclick:()=>et(t)},"Undo"))):u.append(i("button",{class:"btn",onclick:()=>tt(t)},"Mark as bought"));return i("article",{class:l?"card bought":"card"},h,i("div",{class:"body"},i("div",{class:"meta"},i("span",{},t.site??""),t.price&&i("span",{class:"price"},t.price)),i("h2",{},t.url?i("a",r({}),t.title):t.title),t.note&&i("p",{class:"note"},t.note),u))}function Y(){let t=i("div",{class:"noimg"});return t.innerHTML='<svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 0 1 0 5"/></svg>',t}function Z(){this.replaceWith(Y())}var H=null;function tt(t){H=t,a("buyName").textContent=t.title,a("buyErr").textContent="",a("buyConfirm").disabled=!1,a("buyDialog").showModal()}a("buyCancel").addEventListener("click",()=>a("buyDialog").close());a("buyConfirm").addEventListener("click",async()=>{if(!H)return;let t=H,e=a("buyConfirm");e.disabled=!0;try{let{claim:s}=await d(`/api/items/${t.id}/buy`,{method:"POST"});J(t.id,s),t.bought=!0,a("buyDialog").close(),w(),c("Marked as bought. Thank you!")}catch(s){e.disabled=!1,a("buyErr").textContent=s.message,(s.status===409||s.status===404)&&f()}});async function et(t){let e=O()[t.id];if(e)try{await d(`/api/items/${t.id}/unbuy`,{method:"POST",json:{claim:e}}),J(t.id,null),t.bought=!1,w(),c("Undone. It\u2019s back on the list.")}catch(s){c(s.message)}}function nt(){a("loginErr").textContent="",a("loginKey").value="",a("loginDialog").showModal()}a("loginCancel").addEventListener("click",()=>a("loginDialog").close());a("loginForm").addEventListener("submit",async t=>{t.preventDefault();let e=a("loginKey").value.trim(),s=D();k(e);try{await d("/api/login",{method:"POST"}),a("loginDialog").close(),history.replaceState(null,"",location.pathname+location.search),await f(),c("Logged in. Bought marks are now hidden on this device.")}catch(n){k(s),a("loginErr").textContent=n.status===401?"That code isn't right.":n.message}});a("logout").addEventListener("click",()=>{k(null),U(),f()});var _=location.pathname.replace(/christmastheme\/?$/,"").replace(/\/?$/,"/");async function q(t,e){try{await navigator.clipboard.writeText(t),c(`${e} copied.`)}catch{prompt("Copy this link:",t)}}a("copyLink").addEventListener("click",()=>q(location.origin+_,"Link"));a("copyXmas").addEventListener("click",()=>q(location.origin+_+"christmastheme/","Christmas link"));a("addPlain").addEventListener("click",()=>{P(null,{url:"",title:"",site:"",price:"",note:"",imageUrl:""})});a("addForm").addEventListener("submit",async t=>{t.preventDefault();let e=a("addUrl").value.trim(),s=a("addBtn");s.disabled=!0,s.textContent="Fetching\u2026";try{let n=await d("/api/preview",{method:"POST",json:{url:e}});P(null,{url:e,title:n.title??"",site:n.site,price:n.price??"",note:"",imageUrl:n.image??""},n.blocked)}catch(n){c(n.message)}finally{s.disabled=!1,s.textContent="Get details"}});function U(){let t=a("editor");t.hidden=!0,t.replaceChildren()}function P(t,e,s=!1){let n=e??{url:t.url??"",title:t.title,site:t.site??"",price:t.price??"",note:t.note??"",imageUrl:t.image??""},l=null,r=(m,b)=>i("div",{},i("label",{htmlFor:b.id},m),b),h=i("input",{type:"url",id:"edUrl",value:n.url,placeholder:"Leave empty for things like gift cards"}),u=i("input",{type:"text",id:"edTitle",value:n.title,required:!0,maxLength:300}),g=i("input",{type:"text",id:"edPrice",value:n.price,placeholder:"\xA30.00",maxLength:50}),j=i("input",{type:"text",id:"edSite",value:n.site,maxLength:100}),T=i("textarea",{id:"edNote",placeholder:"Size, colour, anything they should know",maxLength:500});T.value=n.note;let y=i("input",{type:"text",id:"edImage",value:n.imageUrl.startsWith("/img/")?"":n.imageUrl,placeholder:n.imageUrl.startsWith("/img/")?"Saved picture (paste a link to replace)":"Picture link"}),E=i("input",{type:"file",accept:"image/*",hidden:!0}),N=i("div",{class:"pic"}),C=m=>{N.replaceChildren(m?i("img",{src:m,alt:"",referrerPolicy:"no-referrer"}):"No picture")};C(S(n.imageUrl||null)),y.addEventListener("input",()=>{l=null,C(y.value.trim()||S(n.imageUrl.startsWith("/img/")?n.imageUrl:null))}),E.addEventListener("change",()=>{l=E.files?.[0]??null,l&&(y.value="",C(URL.createObjectURL(l)))});let M=i("button",{class:"btn primary",type:"submit"},t?"Save changes":"Add to list"),X=i("form",{class:"editor",onsubmit:async m=>{m.preventDefault(),M.disabled=!0;let b=y.value.trim(),G=!b&&!l&&n.imageUrl.startsWith("/img/"),K={url:h.value.trim(),title:u.value.trim(),price:g.value.trim(),site:j.value.trim(),note:T.value.trim(),imageUrl:l?t?t.image:null:G?n.imageUrl:b||null};try{let v=t?.id;t?await d(`/api/items/${t.id}`,{method:"PATCH",json:K}):v=(await d("/api/items",{method:"POST",json:K})).id,l&&v&&await d(`/api/items/${v}/image`,{method:"PUT",body:l,headers:{"Content-Type":l.type}}),U(),a("addUrl").value="",await f(),c(t?"Saved.":"Added to the list.")}catch(v){c(v.message),M.disabled=!1}}},i("div",{},N,i("button",{class:"btn small",type:"button",style:"margin-top:8px;width:100%",onclick:()=>E.click()},"Upload picture"),E),i("div",{},s&&i("p",{class:"hint warn"},"That shop didn't let me read the page, so fill in the details yourself. Right-click the product picture \u2192 Copy image address, or save it and use Upload picture."),r("Name",u),i("div",{class:"row2"},r("Price",g),r("Shop",j)),r("Note (optional)",T),r("Picture link",y),r("Link (optional)",h),i("div",{class:"actions"},M,i("button",{class:"btn ghost",type:"button",onclick:U},"Cancel")))),x=a("editor");x.replaceChildren(X),x.hidden=!1,x.scrollIntoView({behavior:"smooth",block:"nearest"}),u.focus()}async function $(t,e){let s=o.indexOf(t),n=s+e;if(!(n<0||n>=o.length)){o.splice(s,1),o.splice(n,0,t),w();try{await d("/api/order",{method:"POST",json:{ids:o.map(l=>l.id)}})}catch(l){c(l.message),f()}}}async function it(t){if(confirm(`Delete "${t.title}" from the list?`))try{await d(`/api/items/${t.id}`,{method:"DELETE"}),o=o.filter(e=>e!==t),w(),c("Deleted.")}catch(e){c(e.message)}}function z(){location.hash==="#owner"&&!p&&nt()}window.addEventListener("hashchange",z);f().then(z);})();
 </script>
 </body>
 </html>
